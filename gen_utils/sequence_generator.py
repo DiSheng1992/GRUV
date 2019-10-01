@@ -2,7 +2,7 @@ import numpy as np
 
 
 # Extrapolates from a given seed sequence
-def generate_from_seed(model, seed, sequence_length, data_variance, data_mean):
+def generate_from_seed(model, seed, sequence_length, data_variance, data_mean, data_size):
     seedSeq = seed.copy()
     output = []
 
@@ -11,7 +11,7 @@ def generate_from_seed(model, seed, sequence_length, data_variance, data_mean):
     # Step 2 - Concatenate X_n + 1 onto A
     # Step 3 - Repeat MAX_SEQ_LEN times
     for it in range(sequence_length):
-        seedSeqNew = model.predict(seedSeq[:,-40:,:])  # Step 1. Generate X_n + 1
+        seedSeqNew = model.predict(seedSeq[:,-1*data_size:,:])  # Step 1. Generate X_n + 1
         # Step 2. Append it to the sequence
         if it == 0:
             for i in range(seedSeqNew.shape[1]):

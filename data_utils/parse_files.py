@@ -61,7 +61,7 @@ def convert_folder_to_wav(directory, sample_rate=44100):
             convert_mp3_to_wav(filename=fullfilename, sample_frequency=sample_rate)
         if file.endswith('.flac'):
             convert_flac_to_wav(filename=fullfilename, sample_frequency=sample_rate)
-    return directory + 'wave/'
+    return directory + 'wave/drum_origin/'
 
 
 def read_wav_as_np(filename):
@@ -181,7 +181,10 @@ def convert_nptensor_to_wav_files(tensor, indices, filename, useTimeDomain=False
 
 def load_training_example(filename, block_size=2048, useTimeDomain=False):
     data, bitrate = read_wav_as_np(filename)
-    x_t = convert_np_audio_to_sample_blocks(data[:, 0], block_size)
+    if len(data.shape)>1:
+        x_t = convert_np_audio_to_sample_blocks(data[:, 0], block_size)
+    else:
+        x_t = convert_np_audio_to_sample_blocks(data, block_size)
     y_t = x_t[1:]
     y_t.append(np.zeros(int(block_size)))  # Add special end block composed of all zeros
     if useTimeDomain:
