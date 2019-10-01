@@ -15,7 +15,7 @@ def convert_mp3_to_wav(filename, sample_frequency):
     new_path = ''
     if (filename[0] == '/'):
         new_path = '/'
-    for i in xrange(len(files) - 1):
+    for i in range(len(files) - 1):
         new_path += files[i] + '/'
     tmp_path = new_path + 'tmp'
     new_path += 'wave'
@@ -43,7 +43,7 @@ def convert_flac_to_wav(filename, sample_frequency):
     new_path = ''
     if (filename[0] == '/'):
         new_path = '/'
-    for i in xrange(len(files) - 1):
+    for i in range(len(files) - 1):
         new_path += files[i] + '/'
     new_path += 'wave'
     if not os.path.exists(new_path):
